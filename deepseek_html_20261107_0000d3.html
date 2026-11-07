@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exnox | وكالة تسويق رقمي</title>
+    
+    <!-- خطوط جوجل العربية -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
+    
+    <!-- مكتبة AOS لحركات التمرير -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- أيقونات FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="byda.png">
+    <style>
+        /* --- المتغيرات الأساسية --- */
+        :root {
+            --primary-color: #521B89;
+            --primary-light: #7A35B5;
+            --secondary-color: #000000;
+            --bg-color: #FFFFFF;
+            --text-color: #333333;
+            --light-gray: #F5F5F7;
+            --font-heading: 'Tajawal', sans-serif;
+            --font-body: 'Cairo', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            color: var(--secondary-color);
+        }
+
+        a { text-decoration: none; }
+        ul { list-style: none; }
+
+        /* --- القائمة العلوية (Navbar) --- */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* شعار الهيدر الحقيقي (N) */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .logo-icon {
+            width: 70px;
+            height: 45px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+            font-weight: 900;
+            font-family: var(--font-heading);
+            transition: transform 0.4s ease, background 0.4s ease;
+            
+        }  
+        .logo-img {
+      width: 90px;
+      height: 48px;
+      border-radius: 12px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover .logo-img {
+      transform: rotate(-5deg) scale(1.05);
+    }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--secondary-color);
+            font-weight: 600;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover { color: var(--primary-color); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: all 0.4s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: var(--secondary-color);
+            transition: width 0.4s ease;
+            z-index: -1;
+            border-radius: 50px;
+        }
+
+        .btn-primary:hover::before { width: 100%; }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+
+        /* --- قسم الهيرو --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(82, 27, 137, 0.85), rgba(0, 0, 0, 0.75)), url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--bg-color);
+            padding-top: 80px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            color: var(--bg-color);
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        .hero-content .slogan {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #E0C3FC;
+            margin-bottom: 40px;
+            display: block;
+            min-height: 40px; /* لمنع القفز أثناء الأنميشن */
+        }
+
+        /* --- قسم من نحن --- */
+        .section-padding { padding: 100px 0; }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-image { position: relative; }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            transition: transform 0.5s ease;
+        }
+
+        .about-image:hover img { transform: scale(1.02); }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .about-text h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--primary-color);
+            margin-top: 10px;
+            border-radius: 2px;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .vision-mission {
+            background: var(--light-gray);
+            padding: 20px;
+            border-radius: 15px;
+            border-right: 5px solid var(--primary-color);
+            margin-top: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .vision-mission:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 5px 15px rgba(82, 27, 137, 0.1);
+        }
+
+        .vision-mission strong {
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* --- ما يميزنا --- */
+        .features { background-color: var(--light-gray); }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--bg-color);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--primary-color);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+            transform-origin: right;
+        }
+
+        .feature-card:hover::before { transform: scaleX(1); transform-origin: left; }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            transition: transform 0.4s ease;
+        }
+
+        .feature-card:hover .feature-icon { transform: scale(1.2) rotate(5deg); }
+
+        .feature-card h3 { margin-bottom: 15px; }
+
+        /* --- الخدمات (بدون أسعار) --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background: var(--bg-color);
+            border: 2px solid var(--light-gray);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            cursor: default;
+            position: relative;
+        }
+
+        .service-card::after {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: var(--primary-color);
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.4s ease;
+        }
+
+        .service-card:hover::after { opacity: 1; transform: scale(1); }
+
+        .service-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 15px 30px rgba(82, 27, 137, 0.15);
+            transform: translateY(-5px);
+            background: linear-gradient(145deg, #ffffff, #fcf9ff);
+        }
+
+        .service-icon {
+            font-size: 35px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            background: var(--light-gray);
+            width: 70px;
+            height: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            transition: all 0.4s ease;
+        }
+
+        .service-card:hover .service-icon {
+            background: var(--primary-color);
+            color: var(--bg-color);
+            transform: rotateY(180deg);
+        }
+
+        .service-card h3 {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .service-card p {
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        /* --- الفوتر --- */
+        footer {
+            background: var(--secondary-color);
+            color: var(--bg-color);
+            padding: 50px 0 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .footer-logo {
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--bg-color);
+            margin-bottom: 20px;
+            font-family: var(--font-heading);
+        }
+
+        .footer-logo span { color: var(--primary-color); }
+
+        .footer-social { margin: 20px 0; }
+
+        .footer-social a {
+            color: var(--bg-color);
+            font-size: 24px;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-social a:hover {
+            color: var(--primary-color);
+            transform: translateY(-5px) scale(1.2);
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-top: 20px;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+        }
+
+        /* --- التجاوب --- */
+        @media (max-width: 992px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .n-logo-overlay { display: none; }
+            .features-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-content h1 { font-size: 2rem; }
+            .hero-content .slogan { font-size: 1.3rem; }
+            .section-padding { padding: 60px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- القائمة العلوية -->
+    <header>
+        <div class="container nav-wrapper">
+            <div class="logo-container">
+                <!-- شعار الهيدر الحقيقي (N) -->
+                <div class="logo-icon">
+                    <img src="bnaf.png" alt="شعار EXNOX" class="logo-img">
+                </div>
+            </div>
+            <nav class="nav-links">
+                <a href="#home">الرئيسية</a>
+                <a href="#about">من نحن</a>
+                <a href="#services">خدماتنا</a>
+            </nav>
+            <a href="#contact" class="btn-primary">تواصل معنا</a>
+        </div>
+    </header>
+
+    <!-- قسم الهيرو -->
+    <section class="hero" id="home">
+        <div class="container hero-content" data-aos="zoom-in" data-aos-duration="1000">
+            <h1>نحوّل ميزانية التسويق الصغيرة<br>إلى مبيعات حقيقية</h1>
+            <p>وكالة تسويق رقمي متخصصة في مساعدة المشاريع الصغيرة والمتوسطة على زيادة المبيعات والانتشار.</p>
+            <!-- تأثير الكتابة (Typewriter) -->
+            <span class="slogan" id="typewriter"></span>
+            <a href="#contact" class="btn-primary" style="font-size: 1.2rem; padding: 15px 40px;">ابدأ الآن</a>
+        </div>
+    </section>
+
+    <!-- قسم من نحن -->
+    <section class="section-padding" id="about">
+        <div class="container about-grid">
+            <div class="about-image" data-aos="fade-left">
+                <img src="bnaf.png" alt="فريق Exnox">
+            </div>
+            <div class="about-text" data-aos="fade-right">
+                <h2>من نحن</h2>
+                <p>في <strong>Exnox</strong>، نؤمن أن كل مشروع جزائري يستحق فرصة حقيقية للنمو. نحن لا نبيع وعوداً، بل نقدم استراتيجيات مبنية على دراسة السوق و تحليل المنافسين.</p>
+                
+                <div class="vision-mission">
+                    <strong>رؤيتنا:</strong>
+                    <p>أن نكون الشريك التسويقي الأول للمشاريع الجزائرية الطامحة للنمو.</p>
+                </div>
+                <div class="vision-mission">
+                    <strong>رسالتنا:</strong>
+                    <p>تحويل ميزانية التسويق الصغيرة إلى مبيعات حقيقية قابلة للقياس.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ما يميزنا -->
+    <section class="section-padding features">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 50px;" data-aos="fade-up">لماذا تختار Exnox؟</h2>
+            <div class="features-grid">
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fa-solid fa-magnifying-glass-chart feature-icon"></i>
+                    <h3>نبدأ بالدراسة</h3>
+                    <p>نقوم بالتدقيق و التخطيط فيها يشمل دراسة السوق و المنافسين و دراسة جمهور و الفكرة  قبل صرف أي دينار على الإعلانات.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fa-solid fa-chart-line feature-icon"></i>
+                    <h3>نتائج مقاسة</h3>
+                    <p>نتائج مقاسة بتقرير شهري مفصل بالأرقام ، لا وعود عامة.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fa-solid fa-mobile-screen-button feature-icon"></i>
+                    <h3>واقع السوق الجزائري</h3>
+                    <p>حلول تناسب واقع السوق الجزائري.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الخدمات (بدون أسعار وباقات) -->
+    <section class="section-padding" id="services">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 20px;" data-aos="fade-up">خدماتنا</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 40px;" data-aos="fade-up">نقدم حلولاً متكاملة تناسب احتياجات مشروعك</p>
+            
+            <div class="services-grid">
+                <div class="service-card" data-aos="fade-up" data-aos-delay="50">
+                    <div class="service-icon"><i class="fa-solid fa-clipboard-check"></i></div>
+                   <h3>متابعة مشروع اسبوعيا</h3>
+                    <p>كتابة تقرير كل اسبوع يوضح اخطاء و مشاكل لي واجهها مشروع و نسبة مبيعات و نسبة العملاء في الاسبوع </p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-icon"><i class="fa-solid fa-chess"></i></div>
+                    <h3>الاستراتيجية التسويقية الشهرية</h3>
+                    <p>من خلال دراسة الفكرة بشكل دقيق و تحليل السوق و المنافسين و تحديد الجمهور المستهدف بدقة من اجل بناء استراتجية تسويقية شهرية واضحة</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="150">
+                    <div class="service-icon"><i class="fa-brands fa-instagram"></i></div>
+                    <h3>إدارة السوشيال ميديا</h3>
+                    <p>منشورات احترافية + إدارة التفاعل و الردود + بناء استراتجية محتوى واضحة للإنتشار و بناء حضور قوي في سوشيال ميديا. </p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-icon"><i class="fa-solid fa-video"></i></div>
+                    <h3>فيديو قصير Reels/TikTok</h3>
+                    <p>تصوير ومونتاج فيديوهات جذابة ومؤثرة.</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="250">
+                    <div class="service-icon"><i class="fa-solid fa-bullhorn"></i></div>
+                    <h3>إدارة الإعلانات المدفوعة</h3>
+                    <p>Meta / TikTok / Google بإدارة احترافية.</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-icon"><i class="fa-solid fa-rocket"></i></div>
+                    <h3>صفحة هبوط (Landing Page)</h3>
+                    <p>تصميم صفحة مخصصة لزيادة معدلات التحويل.</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="350">
+                    <div class="service-icon"><i class="fa-solid fa-store"></i></div>
+                    <h3>متجر إلكتروني كامل</h3>
+                    <p>بناء متجر الكتروني كامل لتسهيل عملية الشراء على الزبون</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="service-icon"><i class="fa-solid fa-palette"></i></div>
+                    <h3>هوية بصرية</h3>
+                    <p>تصميم هوية بصرية للمشروع كامل ليعكس هوية علامتك التجارية .</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="450">
+                    <div class="service-icon"><i class="fa-solid fa-headset"></i></div>
+                    <h3>تأكيد الطلبات (Call Center)</h3>
+                    <p>متابعة العملاء وتأكيد الطلبات لضمان البيع.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-logo">  <img src="byda.png" alt="شعار EXNOX" class="logo-img"></div>
+            <p>نخطط ، ننفذ، و نقيس... باش تبيع أكثر.</p>
+            <div class="footer-social">
+                <a href="https://www.facebook.com/profile.php?id=61596360779694"><i class="fa-brands fa-facebook"></i></a>
+                <a href="https://www.instagram.com/exnox.agency/?utm_source=ig_web_button_share_sheet"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+            <p class="footer-text">© 2026 Exnox.</p>
+        </div>
+    </footer>
+
+    <!-- سكريبت حركات التمرير -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // تهيئة مكتبة AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100,
+        });
+
+        // تأثير الكتابة (Typewriter) للشعار في الهيرو
+        const text = '"نخطط، ننفذ، ونقيس... باش تبيع أكثر."';
+        const typewriterElement = document.getElementById('typewriter');
+        let i = 0;
+
+        function typeWriter() {
+            if (i < text.length) {
+                typewriterElement.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+        
+        // بدء تأثير الكتابة بعد تحميل الصفحة بقليل
+        window.onload = function() {
+            setTimeout(typeWriter, 500);
+        };
+    </script>
+</body>
+</html>
